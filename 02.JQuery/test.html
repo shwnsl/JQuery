@@ -1,0 +1,176 @@
+<!-- ! 치고 엔터 누르면 html 기본 설정이 나옴 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <link rel="stylesheet" href="test.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            let src = $('script').attr('src');
+            //alert(src);
+            $('h1').css('background','black');
+            $('h1').css('color','yellow');
+            //$('img').attr('src','http://via.placeholder.com/100x100');
+            //$('img').attr('width','100');
+            //$('img').attr('alt','네모네모');
+            $('img').attr({
+                alt:'넴모네모',
+                src: function (index) {
+                    let size = (index + 1) * 100;
+
+                    return 'http://via.placeholder.com/' + size +'x100';
+                }
+            });
+            $('.box').css('float','left');
+            $('.box').css('margin',10);
+            $('.box').css('width',100);
+            $('.box').css('height',100);
+            $('.box').css('backgroundColor','red');
+
+            let op = '';
+            for (let i = 0; i < 156; i++) {
+                op += '<div class="bb"></div>';                
+            }
+            $('body').append(op);
+            $('.bb').css({
+                height: 5,
+                backgroundColor: function (i) {
+                    return 'rgb('+i+','+i+2+','+i+23+')';
+                }
+            });
+
+            $('h2:nth-child(1)').text('<a href="#">text</a>');
+            $('h2:nth-child(2)').html('<a href="#">html</a>');
+
+            let text = $('h3').text();
+            let html = $('h3').html();
+
+            //alert("text : " + text);
+            //alert("html : " + html);
+
+            $('#box').hover(function () {
+                $('#box').addClass('hover');
+                $(this).css({
+                    backgroundColor : 'blue',
+                    borderRadius : '50%'
+                });
+            }, function () {
+                $('#box').removeClass('hover');
+                $(this).css({
+                    backgroundColor : 'red',
+                    borderRadius : '0'
+                });
+            });
+
+            $('#box').click(function () {
+                alert('click');
+            });
+
+            $('#box2').css({
+                width: 100,
+                height: 100,
+                background: 'orange'
+            }).on({
+                click: function () {
+                    $(this).css('background', 'yellow');
+                },
+                mouseenter: function () {
+                    $(this).css('background', 'blue');
+                },
+                mouseleave: function () {
+                    $(this).css('background', 'green');
+                }
+            });
+
+            $('a').click(function (event) {
+                alert('click');
+                event.preventDefault();
+            });
+
+            $('#box3').animate({
+                width: 300,
+                background: 'red',
+                opacity: 0.5
+            },500).animate({
+                width: 500,
+                opacity: 1,
+                background: 'blue'
+            },500);
+
+            // 변수를 선언합니다.
+            let clearQueue = false;
+            let goToEnd = false;
+
+            // 이벤트를 연결합니다.
+            $('#clearQueue').change(function () {
+                clearQueue = $(this).prop('checked')
+            });
+
+            $('#goToEnd').change(function () {
+                goToEnd = $(this).prop('checked');
+            });
+
+            $('#stopButton').click(function () {
+                $('#box4').stop(clearQueue, goToEnd);
+            });
+
+            // 스타일을 변경합니다.
+            $('#box4').css({
+                width: 100,
+                height: 100,
+                background: 'red'
+            })
+
+            // 타이머를 연결합니다.
+            setInterval(function () {
+                $('#box4').animate({
+                    width: 200
+                }, 1000).delay(1000).animate({
+                    width: 100,
+                    height: 100
+                }, 1000);
+            }, 3000);
+        });
+    </script>
+    <style>
+        #box, #box3 {
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Header</h1>
+    <h1>Header</h1>
+    <h1>Header</h1>
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <h2>1111</h2>
+    <h2>2222</h2>
+    <h3></h3>
+    <h3></h3>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <a href="http://hanbit.co.kr">gfdgdfgdfgdf</a>
+
+    <!-- 입력 양식 -->
+    <label>clearQueue</label>
+    <input id="clearQueue" type="checkbox">
+    <br>
+    <label>goToEnd</label>
+    <input id="goToEnd" type="checkbox">
+    <br>
+    <button id="stopButton">Stop</button>
+    <!-- 애니메이션 -->
+    <div id="box4"></div>
+</body>
+</html>

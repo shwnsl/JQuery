@@ -1,0 +1,32 @@
+<!-- ! 치고 엔터 누르면 html 기본 설정이 나옴 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <link rel="stylesheet" href="test.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://masonry.desandro.com/masonry.pkgd.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            for (let i = 0; i < 100; i++) {
+                $('<div></div>').addClass('box').css({
+                    width: 100,
+                    height: Math.floor(Math.random()*100)+50
+                }).appendTo('body');
+            };
+            $('body').masonry({
+                columnWidth: 110
+            });
+        });
+    </script>
+    <style>
+        * {margin: 0; padding: 0;}
+        .box {background: skyblue; margin: 5px;}
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
